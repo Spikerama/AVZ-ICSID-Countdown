@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICC Arbitration Countdown</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", "Helvetica", sans-serif;
+        }
+        body {
+            background-color: #0d0f12;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+        .countdown-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2em;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        .countdown-header {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #00eaff;
+            margin-bottom: 1em;
+            text-transform: uppercase;
+        }
+        .counter {
+            font-size: 4em;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 0.5em;
+        }
+        .counter .text {
+            font-size: 0.8em;
+            font-weight: 400;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="countdown-header">ZIJIN vs AVZ @ ICC PARIS ARBITRATION</div>
+        <div class="counter"><span class="num days"></span><span class="text">Days</span></div>
+        <div class="counter"><span class="num hours"></span><span class="text">Hours</span></div>
+        <div class="counter"><span class="num minutes"></span><span class="text">Minutes</span></div>
+        <div class="counter"><span class="num seconds"></span><span class="text">Seconds</span></div>
+    </div>
+
+    <script>
+        const countdownDate = new Date("2023-09-30T09:00:00").getTime();
+        const daysElem = document.querySelector(".days");
+        const hoursElem = document.querySelector(".hours");
+        const minutesElem = document.querySelector(".minutes");
+        const secondsElem = document.querySelector(".seconds");
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            daysElem.textContent = days < 10 ? `0${days}` : days;
+            hoursElem.textContent = hours < 10 ? `0${hours}` : hours;
+            minutesElem.textContent = minutes < 10 ? `0${minutes}` : minutes;
+            secondsElem.textContent = seconds < 10 ? `0${seconds}` : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
