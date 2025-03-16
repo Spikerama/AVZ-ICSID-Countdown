@@ -2,84 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ICSID Countdown</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Overlay</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', Helvetica, sans-serif;
         }
-
+        
         body {
-            background-color: #121317;
-            color: #ffffff;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            text-align: center;
+            background: url('your-image.jpg') no-repeat center center/cover;
+            position: relative;
         }
 
-        .countdown-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .overlay {
+            position: absolute;
+            top: 50%; /* Adjust this to position the number correctly */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8vw; /* Scales with screen width */
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
         }
-
-        .title {
-            font-size: 1.2rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #18f98f;
-            margin-bottom: 10px;
-        }
-
-        .days-number {
-            font-size: 8rem;
-            font-weight: 600;
-            line-height: 1;
-            color: #ffffff;
-        }
-
-        .days-label {
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: #ffffff;
-            margin-top: -10px;
-        }
-
     </style>
 </head>
 <body>
-
-    <div class="countdown-container">
-        <div class="title">AVZ vs ZIJIN, COMMINIERE & DATHOMIR @ ICSID</div>
-        <div class="days-number" id="days-counter">0</div>
-        <div class="days-label">DAYS</div>
-    </div>
+    <div class="overlay" id="countdown"></div>
 
     <script>
-        const countdownDate = new Date("2025-06-02T00:00:00").getTime();
-        const daysElem = document.getElementById("days-counter");
-
         function updateCountdown() {
+            const targetDate = new Date("June 2, 2025").getTime();
             const now = new Date().getTime();
-            const distance = countdownDate - now;
-            const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
-
-            daysElem.textContent = days;
+            const daysRemaining = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
+            document.getElementById("countdown").textContent = daysRemaining;
         }
 
         updateCountdown();
-        setInterval(updateCountdown, 1000);
+        setInterval(updateCountdown, 1000); // Update every second
     </script>
-
 </body>
 </html>
