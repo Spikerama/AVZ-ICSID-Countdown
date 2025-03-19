@@ -39,7 +39,7 @@
 
     .countdown-box {
       width: 120px;
-      height: 150px;
+      height: 120px; /* Adjusted to be more square */
       background-color: rgba(255, 255, 255, 0.05);
       border: 2px solid rgba(255, 255, 255, 0.2);
       text-align: center;
@@ -53,13 +53,15 @@
     }
 
     .countdown-number {
-      font-size: 5em; /* 10% larger */
+      font-size: 5em; /* Large numbers */
       color: #ffffff; /* White text */
+      line-height: 1;
     }
 
     .countdown-label {
-      font-size: 0.7em; /* 30% smaller */
+      font-size: 0.75em; /* Small labels */
       opacity: 0.8;
+      margin-top: -10px; /* Moves the text closer to the numbers */
     }
 
   </style>
@@ -98,12 +100,4 @@
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       document.getElementById("days").textContent = days < 10 ? `0${days}` : days;
-      document.getElementById("hours").textContent = hours < 10 ? `0${hours}` : hours;
-      document.getElementById("minutes").textContent = minutes < 10 ? `0${minutes}` : minutes;
-      document.getElementById("seconds").textContent = seconds < 10 ? `0${seconds}` : seconds;
-    }
-
-    setInterval(updateCountdown, 1000);
-  </script>
-</body>
-</html>
+      document.getElementById("hours").textContent =
