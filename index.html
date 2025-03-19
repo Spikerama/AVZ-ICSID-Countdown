@@ -34,12 +34,12 @@
     /* Countdown container */
     .countdown-container {
       display: flex;
-      gap: 20px;
+      gap: 15px; /* Less gap to tighten spacing */
     }
 
     .countdown-box {
-      width: 120px;
-      height: 120px; /* Adjusted to be more square */
+      width: 100px; /* Now a perfect square */
+      height: 100px;
       background-color: rgba(255, 255, 255, 0.05);
       border: 2px solid rgba(255, 255, 255, 0.2);
       text-align: center;
@@ -53,15 +53,15 @@
     }
 
     .countdown-number {
-      font-size: 5em; /* Large numbers */
-      color: #ffffff; /* White text */
+      font-size: 3.8em; /* Large numbers */
+      color: #ffffff;
       line-height: 1;
     }
 
     .countdown-label {
-      font-size: 0.75em; /* Small labels */
+      font-size: 0.65em; /* Smaller text */
       opacity: 0.8;
-      margin-top: -10px; /* Moves the text closer to the numbers */
+      margin-top: -5px; /* Moves text closer to number */
     }
 
   </style>
@@ -100,4 +100,12 @@
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       document.getElementById("days").textContent = days < 10 ? `0${days}` : days;
-      document.getElementById("hours").textContent =
+      document.getElementById("hours").textContent = hours < 10 ? `0${hours}` : hours;
+      document.getElementById("minutes").textContent = minutes < 10 ? `0${minutes}` : minutes;
+      document.getElementById("seconds").textContent = seconds < 10 ? `0${seconds}` : seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
