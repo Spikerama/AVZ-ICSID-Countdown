@@ -20,6 +20,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            padding: 20px;
         }
 
         .header-text {
@@ -30,15 +31,18 @@
             max-width: 600px;
             line-height: 1.4;
             margin-bottom: 20px;
-            text-transform: none; /* Upper and lowercase */
-            position: relative;
-            left: -50px; /* Align with boxes */
+            text-transform: none;
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .countdown-container {
             display: flex;
             gap: 20px;
             justify-content: center;
+            align-items: center;
         }
 
         .counter {
@@ -46,8 +50,8 @@
             padding: 40px;
             border-radius: 0; /* Sharp edges */
             text-align: center;
-            width: 120px;
-            height: 120px; /* Square */
+            width: 140px; /* Ensuring square */
+            height: 140px; /* Ensuring square */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -55,13 +59,13 @@
         }
 
         .num {
-            font-size: 3.8em;
+            font-size: 4em;
             font-weight: 700; /* Bold */
         }
 
         .text {
             font-size: 0.75em;
-            margin-top: 5px; /* Adjust this value to control spacing */
+            margin-top: 3px; /* Adjust this value for spacing */
             opacity: 0.7;
             font-weight: 600; /* Semi Bold */
         }
