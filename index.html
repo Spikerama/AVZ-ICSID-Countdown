@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #121317;
+            background: url('your-image-url.jpg') no-repeat center center/cover;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -31,17 +31,14 @@
             line-height: 1.4;
             margin-bottom: 20px;
             text-transform: none; /* Upper and lowercase */
-            position: absolute;
-            top: 20%;
-            left: 10%; /* Aligns with boxes */
+            position: relative;
+            left: -50px; /* Align with boxes */
         }
 
         .countdown-container {
             display: flex;
             gap: 20px;
-            position: absolute;
-            top: 35%;
-            left: 10%;
+            justify-content: center;
         }
 
         .counter {
@@ -50,7 +47,7 @@
             border-radius: 0; /* Sharp edges */
             text-align: center;
             width: 120px;
-            height: 120px; /* Now a square */
+            height: 120px; /* Square */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -64,7 +61,7 @@
 
         .text {
             font-size: 0.75em;
-            margin-top: 3px;
+            margin-top: 5px; /* Adjust this value to control spacing */
             opacity: 0.7;
             font-weight: 600; /* Semi Bold */
         }
