@@ -49,7 +49,6 @@
         .counter {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
-            border-radius: 0;
             text-align: center;
             width: 140px;
             height: 140px;
@@ -66,27 +65,33 @@
 
         .text {
             font-size: 0.75em;
-            position: relative;
             transform: translateY(-8px);
             opacity: 0.7;
             font-weight: 600;
         }
 
-        /* Animated text styles */
+        /* Context text container */
         .context-text {
             font-size: 1em;
-            text-align: left; /* Left-aligned */
+            text-align: left;
             opacity: 0;
-            margin-top: 10px;
-            width: 600px; /* Matches the width of the headline */
+            width: 600px;
             position: absolute;
-            top: calc(50% + 130px); /* Places it below the counter */
+            top: calc(50% + 130px);
             left: 50%;
             transform: translateX(-50%);
         }
 
-        .reveal-text {
-            margin-bottom: 5px;
+        /* Hide all sets initially */
+        .text-set {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+        }
+
+        /* Green color for alternating text sets */
+        .green-text {
+            color: #32CD32; /* Bright green */
         }
     </style>
 </head>
@@ -116,11 +121,25 @@
         </div>
     </div>
 
-    <!-- Animated text underneath -->
+    <!-- Animated Text Sections -->
     <div class="context-text">
-        <p class="reveal-text">On March 15, 2025, Australian mining company AVZ Minerals Limited won </p>
-        <p class="reveal-text">a legal victory against La Congolaise d'Exploitation Minière (Cominière).</p>
-        <p class="reveal-text">The partial penalty to be enforced, amounts to €39.125 million plus interest.</p>
+        <div class="text-set set-1">
+            <p>On March 15, 2025, Australian mining company AVZ Minerals Limited won</p>
+            <p>a legal victory against La Congolaise d'Exploitation Minière (Cominière).</p>
+            <p>The partial penalty to be enforced amounts to €39.125 million plus interest.</p>
+        </div>
+
+        <div class="text-set set-2 green-text">
+            <p>The ICSID tribunal is set to rule on AVZ’s remaining 75% ownership claim.</p>
+            <p>This decision could reshape control over one of the world's largest lithium deposits.</p>
+            <p>AVZ seeks to restore its rightful stake in the Manono Lithium Project.</p>
+        </div>
+
+        <div class="text-set set-3">
+            <p>Global investors are closely watching as the ruling nears.</p>
+            <p>The final outcome will have major implications for the lithium industry.</p>
+            <p>Legal clarity could determine future investment in the DRC.</p>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -150,17 +169,18 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // GSAP Animation for context text with 3-second delay
-        gsap.to(".context-text", { opacity: 1, duration: 1, delay: 3 });
+        // GSAP Timeline for rotating text sets
+        let tl = gsap.timeline({ repeat: -1 });
 
-        gsap.from(".reveal-text", {
-            opacity: 0,
-            y: 10,
-            duration: 1.5,
-            ease: "power2.out",
-            stagger: 2.5,
-            delay: 2 // Delays animation start by 3 seconds
-        });
+        tl.to(".set-1", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
+          .to(".set-1", { opacity: 0, y: -10, duration: 1, delay: 3 })
+
+          .to(".set-2", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
+          .to(".set-2", { opacity: 0, y: -10, duration: 1, delay: 3 })
+
+          .to(".set-3", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
+          .to(".set-3", { opacity: 0, y: -10, duration: 1, delay: 3 });
+
     </script>
 
 </body>
