@@ -21,11 +21,11 @@
             align-items: center;
             height: 100vh;
             padding: 20px;
-            text-align: center; /* Center everything */
+            text-align: center;
         }
 
         .header-text {
-            font-size: 1.7em !important; /* Forces the change */
+            font-size: 1.7em !important;
             font-weight: 600;
             text-align: left;
             width: 600px;
@@ -35,13 +35,13 @@
             position: absolute;
             top: 15%;
             left: 50%;
-            transform: translateX(-50%); /* Centers it */
+            transform: translateX(-50%);
         }
 
         .countdown-container {
             display: flex;
             gap: 20px;
-            justify-content: center; /* Ensures perfect centering */
+            justify-content: center;
             align-items: center;
             width: 100%;
         }
@@ -49,9 +49,9 @@
         .counter {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
-            border-radius: 0; /* Sharp edges */
+            border-radius: 0;
             text-align: center;
-            width: 140px; /* Perfect square */
+            width: 140px;
             height: 140px;
             display: flex;
             flex-direction: column;
@@ -61,17 +61,28 @@
 
         .num {
             font-size: 4em;
-            font-weight: 700; /* Bold */
+            font-weight: 700;
         }
 
         .text {
-        font-size: 0.75em;
-        position: relative;
-        transform: translateY(-8px); /* Adjust this value to fine-tune */
-        opacity: 0.7;
-        font-weight: 600; /* Semi Bold */
-}
+            font-size: 0.75em;
+            position: relative;
+            transform: translateY(-8px);
+            opacity: 0.7;
+            font-weight: 600;
+        }
 
+        /* ✅ New Context Text Styling */
+        .context-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9em; /* Half the headline size */
+            text-align: center;
+            color: white;
+            margin-top: 20px; /* Spacing from counter */
+        }
+
+        .reveal-text {
+            opacity: 0;
         }
     </style>
 </head>
@@ -101,7 +112,15 @@
         </div>
     </div>
 
+    <!-- ✅ New Dynamic Context Text -->
+    <div class="context-text">
+        <p class="reveal-text">Real-time arbitration tracking.</p>
+        <p class="reveal-text">Stay informed on key developments.</p>
+        <p class="reveal-text">Decisive moments are approaching.</p>
+    </div>
+
     <script>
+        // ✅ Countdown Timer Logic
         const countdownDate = new Date("2025-06-02T00:00:00").getTime();
         const daysElem = document.querySelector(".days");
         const hoursElem = document.querySelector(".hours");
@@ -125,41 +144,21 @@
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
-    
-        <!-- Existing Code Above (Counter, Headline, etc.) -->
 
-<!-- New Dynamic Context Text Below Counter -->
-<div class="context-text">
-    <p class="reveal-text">Real-time arbitration tracking.</p>
-    <p class="reveal-text">Stay informed on key developments.</p>
-    <p class="reveal-text">Decisive moments are approaching.</p>
-</div>
-
-<!-- GSAP Animation Script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script>
-    gsap.from(".reveal-text", {
-        opacity: 0,
-        y: 10,
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.2 // Creates the staggered reveal effect
-    });
-.context-text {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.5em; /* Half the headline size */
-    text-align: center;
-    color: white;
-    margin-top: 20px; /* Spacing from counter */
-}
-
-.reveal-text {
-    opacity: 0;
-}
-</script>
-
-<!-- Existing Footer or Other Code Below -->
-
+        // ✅ GSAP Animation for Context Text
+        const script = document.createElement("script");
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";
+        script.onload = function() {
+            gsap.from(".reveal-text", {
+                opacity: 0,
+                y: 10,
+                duration: 1,
+                ease: "power2.out",
+                stagger: 0.2
+            });
+        };
+        document.head.appendChild(script);
+    </script>
 
 </body>
 </html>
