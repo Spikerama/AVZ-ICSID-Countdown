@@ -25,7 +25,7 @@
         }
 
         .header-text {
-            font-size: 2em;
+            font-size: 2em !important; /* Forces the change */
             font-weight: 600;
             text-align: left;
             width: 600px;
@@ -67,7 +67,7 @@
         .text {
         font-size: 0.75em;
         position: relative;
-        top: -1px; /* Moves the label closer to the number */
+        transform: translateY(-8px); /* Adjust this value to fine-tune */
         opacity: 0.7;
         font-weight: 600; /* Semi Bold */
 }
