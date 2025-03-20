@@ -74,7 +74,6 @@
         .context-text {
             font-size: 1em;
             text-align: left;
-            opacity: 0;
             width: 600px;
             position: absolute;
             top: calc(50% + 130px);
@@ -82,11 +81,15 @@
             transform: translateX(-50%);
         }
 
-        /* Hide all sets initially */
+        /* Initially hide all sets except the first */
         .text-set {
-            opacity: 0;
             position: absolute;
             width: 100%;
+            opacity: 0;
+        }
+
+        .text-set:first-child {
+            opacity: 1; /* Ensure the first set is visible initially */
         }
 
         /* Green color for alternating text sets */
@@ -170,16 +173,17 @@
         updateCountdown();
 
         // GSAP Timeline for rotating text sets
-        let tl = gsap.timeline({ repeat: -1 });
+        let textSets = document.querySelectorAll(".text-set");
+        let timeline = gsap.timeline({ repeat: -1 });
 
-        tl.to(".set-1", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
-          .to(".set-1", { opacity: 0, y: -10, duration: 1, delay: 3 })
-
-          .to(".set-2", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
-          .to(".set-2", { opacity: 0, y: -10, duration: 1, delay: 3 })
-
-          .to(".set-3", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
-          .to(".set-3", { opacity: 0, y: -10, duration: 1, delay: 3 });
+        textSets.forEach((set, index) => {
+            let nextSet = textSets[(index + 1) % textSets.length]; // Loop back to first set after last
+            timeline
+                .to(set, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }) // Fade in
+                .to(set, { opacity: 0, y: -10, duration: 1, delay: 3 }) // Hold and fade out
+                .set(set, { y: 10 }) // Reset position for next loop
+                .set(nextSet, { opacity: 1 }); // Ensure next set is visible before animation starts
+        });
 
     </script>
 
