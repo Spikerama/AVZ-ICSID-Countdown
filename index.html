@@ -25,7 +25,7 @@
         }
 
         .header-text {
-            font-size: 1.7em !important;
+            font-size: 1.7em;
             font-weight: 600;
             text-align: left;
             width: 600px;
@@ -72,9 +72,8 @@
             font-weight: 600;
         }
 
-        /* ✅ New Context Text Styling */
+        /* ✅ Context Text Styling */
         .context-text {
-            font-family: 'Poppins', sans-serif;
             font-size: 0.9em; /* Half the headline size */
             text-align: center;
             color: white;
@@ -119,6 +118,9 @@
         <p class="reveal-text">Decisive moments are approaching.</p>
     </div>
 
+    <!-- ✅ Include GSAP BEFORE JavaScript runs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <script>
         // ✅ Countdown Timer Logic
         const countdownDate = new Date("2025-06-02T00:00:00").getTime();
@@ -130,6 +132,14 @@
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = countdownDate - now;
+
+            if (distance < 0) {
+                daysElem.textContent = "00";
+                hoursElem.textContent = "00";
+                minutesElem.textContent = "00";
+                secondsElem.textContent = "00";
+                return;
+            }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -146,18 +156,14 @@
         updateCountdown();
 
         // ✅ GSAP Animation for Context Text
-        const script = document.createElement("script");
-        script.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";
-        script.onload = function() {
-            gsap.from(".reveal-text", {
-                opacity: 0,
-                y: 10,
-                duration: 1,
-                ease: "power2.out",
-                stagger: 0.2
-            });
-        };
-        document.head.appendChild(script);
+        gsap.from(".reveal-text", {
+            opacity: 0,
+            y: 10,
+            duration: 1,
+            ease: "power2.out",
+            stagger: 0.2
+        });
+
     </script>
 
 </body>
