@@ -30,7 +30,7 @@
             text-align: left;
             width: 600px;
             line-height: 1.4;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-transform: none;
             position: absolute;
             top: 15%;
@@ -43,7 +43,7 @@
             gap: 20px;
             justify-content: center;
             align-items: center;
-            width: 100%;
+            margin-top: 40px; /* Adjusted to push it down */
         }
 
         .counter {
@@ -72,17 +72,20 @@
             font-weight: 600;
         }
 
-        /* ✅ Context Text Styling */
+        /* Context text below */
         .context-text {
-            font-size: 0.9em; /* Half the headline size */
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85em;
             text-align: center;
             color: white;
-            margin-top: 20px; /* Spacing from counter */
+            margin-top: 40px; /* Space below countdown */
+            opacity: 0; /* Start hidden for animation */
         }
 
         .reveal-text {
-            opacity: 0;
+            margin-bottom: 5px;
         }
+
     </style>
 </head>
 <body>
@@ -111,18 +114,14 @@
         </div>
     </div>
 
-    <!-- ✅ New Dynamic Context Text -->
+    <!-- Dynamic Context Text -->
     <div class="context-text">
         <p class="reveal-text">Real-time arbitration tracking.</p>
         <p class="reveal-text">Stay informed on key developments.</p>
         <p class="reveal-text">Decisive moments are approaching.</p>
     </div>
 
-    <!-- ✅ Include GSAP BEFORE JavaScript runs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
     <script>
-        // ✅ Countdown Timer Logic
         const countdownDate = new Date("2025-06-02T00:00:00").getTime();
         const daysElem = document.querySelector(".days");
         const hoursElem = document.querySelector(".hours");
@@ -132,14 +131,6 @@
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = countdownDate - now;
-
-            if (distance < 0) {
-                daysElem.textContent = "00";
-                hoursElem.textContent = "00";
-                minutesElem.textContent = "00";
-                secondsElem.textContent = "00";
-                return;
-            }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -154,16 +145,18 @@
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
+    </script>
 
-        // ✅ GSAP Animation for Context Text
+    <!-- GSAP Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
         gsap.from(".reveal-text", {
             opacity: 0,
             y: 10,
             duration: 1,
             ease: "power2.out",
-            stagger: 0.2
+            stagger: 0.5
         });
-
     </script>
 
 </body>
