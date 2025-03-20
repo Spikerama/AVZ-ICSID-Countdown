@@ -21,28 +21,29 @@
             align-items: center;
             height: 100vh;
             padding: 20px;
+            text-align: center; /* Center everything */
         }
 
         .header-text {
             font-size: 1.2em;
             font-weight: 600;
             text-align: left;
-            width: 100%;
-            max-width: 600px;
+            width: 600px;
             line-height: 1.4;
             margin-bottom: 20px;
             text-transform: none;
             position: absolute;
             top: 15%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%); /* Centers it */
         }
 
         .countdown-container {
             display: flex;
             gap: 20px;
-            justify-content: center;
+            justify-content: center; /* Ensures perfect centering */
             align-items: center;
+            width: 100%;
         }
 
         .counter {
@@ -50,8 +51,8 @@
             padding: 40px;
             border-radius: 0; /* Sharp edges */
             text-align: center;
-            width: 140px; /* Ensuring square */
-            height: 140px; /* Ensuring square */
+            width: 140px; /* Perfect square */
+            height: 140px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -65,7 +66,7 @@
 
         .text {
             font-size: 0.75em;
-            margin-top: 3px; /* Adjust this value for spacing */
+            margin-top: 3px; /* Adjust for label spacing */
             opacity: 0.7;
             font-weight: 600; /* Semi Bold */
         }
