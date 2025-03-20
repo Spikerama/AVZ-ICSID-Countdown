@@ -125,7 +125,30 @@
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
-    </script>
+    
+        <!-- Existing Code Above (Counter, Headline, etc.) -->
+
+<!-- New Dynamic Context Text Below Counter -->
+<div class="context-text">
+    <p class="reveal-text">Real-time arbitration tracking.</p>
+    <p class="reveal-text">Stay informed on key developments.</p>
+    <p class="reveal-text">Decisive moments are approaching.</p>
+</div>
+
+<!-- GSAP Animation Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+    gsap.from(".reveal-text", {
+        opacity: 0,
+        y: 10,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.2 // Creates the staggered reveal effect
+    });
+</script>
+
+<!-- Existing Footer or Other Code Below -->
+
 
 </body>
 </html>
