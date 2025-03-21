@@ -13,7 +13,7 @@
 }
 
 body {
-    background: url('https://hips.hearstapps.com/hmg-prod/images/sunrise-in-space-royalty-free-image-1719332045.jpg?resize=1200:*') no-repeat center center/cover;
+    background: url('https://www.pixelstalk.net/wp-conte...rth-at-night-view-from-space-4k-wallpaper.jpg') no-repeat center center/cover;
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -96,27 +96,28 @@ body {
         grid-template-columns: 1fr 1fr; /* Two columns */
         gap: 10px;
         width: 90%;
+        max-width: 400px;
     }
 
     .counter {
-        width: 100%; /* Full width within grid */
-        height: auto;
-        padding: 20px; /* Reduce padding slightly */
+        width: 100%;
+        aspect-ratio: 1 / 1; /* Makes it a square */
+        padding: 20px;
     }
 
     .num {
-        font-size: 3em; /* Scale numbers slightly down */
+        font-size: 3.5em; /* Bigger numbers */
     }
 
     .text {
-        font-size: 0.65em; /* Adjust text size */
+        font-size: 0.85em; /* Bigger labels */
     }
 
     .header-text, .context-text {
         width: 90%;
         font-size: 1.4em;
-        text-align: center; /* Center text for better readability */
-        position: static; /* Remove absolute positioning */
+        text-align: left; /* ✅ Keep text left-aligned */
+        position: static;
         transform: none;
     }
 
