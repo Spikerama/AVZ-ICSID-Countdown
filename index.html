@@ -13,16 +13,17 @@
 }
 
 body {
-    background-image: url('https://www.pixelstalk.net/wp-content/uploads/2021/06/Earth-at-night-view-from-space-4k-wallpaper.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #000022; /* Backup color */
+    background: url('https://nypost.com/wp-content/uploads/sites/2/2019/06/earth-sun-feature.jpg?resize=1536,1024&quality=75&strip=all') no-repeat center center/cover;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
 }
 
-
-
-/* Header Text */
+/* Desktop Styling */
 .header-text {
     font-size: 1.8em;
     font-weight: 600;
@@ -37,7 +38,6 @@ body {
     transform: translateX(-50%);
 }
 
-/* Countdown Timer */
 .countdown-container {
     display: flex;
     gap: 20px;
@@ -71,7 +71,7 @@ body {
     font-weight: 600;
 }
 
-/* Context Text */
+/* Context text container */
 .context-text {
     font-size: 1em;
     text-align: left;
@@ -89,39 +89,39 @@ body {
     opacity: 0;
 }
 
-/* ========== Mobile Optimization ========== */
+/* ✅ Mobile Optimization */
 @media (max-width: 768px) {
-    .header-text {
-        font-size: 1.5em;
-        width: 90%;
-        text-align: center;
-        top: 10%;
-    }
-
     .countdown-container {
-        flex-wrap: wrap;
-        gap: 15px;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        gap: 10px;
+        width: 90%;
     }
 
     .counter {
-        width: 100px;
-        height: 100px;
-        padding: 20px;
+        width: 100%; /* Full width within grid */
+        height: auto;
+        padding: 20px; /* Reduce padding slightly */
     }
 
     .num {
-        font-size: 3em;
+        font-size: 3em; /* Scale numbers slightly down */
     }
 
     .text {
-        font-size: 0.7em;
+        font-size: 0.65em; /* Adjust text size */
+    }
+
+    .header-text, .context-text {
+        width: 90%;
+        font-size: 1.4em;
+        text-align: center; /* Center text for better readability */
+        position: static; /* Remove absolute positioning */
+        transform: none;
     }
 
     .context-text {
-        width: 90%;
-        font-size: 0.9em;
-        text-align: center;
-        top: calc(50% + 100px);
+        margin-top: 20px;
     }
 }
 </style>
@@ -206,7 +206,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// GSAP Text Animation
+// GSAP Timeline for text animation
 let textSets = document.querySelectorAll(".text-set");
 let timeline = gsap.timeline({ repeat: -1 });
 
@@ -216,10 +216,7 @@ textSets.forEach((set) => {
     timeline.to(set, { opacity: 1, duration: 0.5 });
 
     lines.forEach((line, i) => {
-        timeline.fromTo(line,
-            { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 1.5, ease: "power2.out", delay: i * 1.5 }
-        );
+        timeline.fromTo(line, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.5, ease: "power2.out", delay: i * 1.5 });
     });
 
     timeline.to(set, { opacity: 0, duration: 1, delay: 2 });
