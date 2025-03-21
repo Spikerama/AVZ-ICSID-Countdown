@@ -8,10 +8,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-/* Background Fix */
+/* Dark Theme Background */
 html, body {
   height: 100%;
-  background: url('https://www.pixelstalk.net/wp-content/uploads/2022/06/Earth-at-night-view-from-space-4k-wallpaper.jpg') no-repeat center center/cover;
+  background-color: #121212;
+  background-image: url('https://www.pixelstalk.net/wp-content/uploads/2022/06/Earth-at-night-view-from-space-4k-wallpaper.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   background-attachment: fixed;
   color: #ffffff;
   margin: 0;
@@ -20,32 +24,33 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start; /* Restores left alignment */
+  align-items: flex-start;
 }
 
 /* Header Text */
 .header-text {
   font-size: 1.8em;
   font-weight: 600;
-  text-align: left; /* Left-aligned */
+  text-align: left;
   line-height: 1.4;
   margin-bottom: 20px;
-  max-width: 600px; /* Keeps readable width */
+  max-width: 600px;
 }
 
 /* Countdown Layout */
 .countdown-container {
   display: flex;
-  justify-content: flex-start; /* Left-aligned */
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
   width: 100%;
   margin-bottom: 30px;
-  flex-wrap: wrap; /* Allows wrapping on smaller screens */
-  gap: 20px;
 }
 
+/* Countdown Box Styling */
 .counter {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   padding: 20px;
   text-align: center;
   width: 140px;
@@ -54,53 +59,47 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 1px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Proper shadow */
 }
 
+/* Countdown Numbers */
 .num {
   font-size: 3em;
   font-weight: 700;
+  color: #00c3ff;
 }
 
+/* Countdown Labels */
 .text {
-  font-size: 0.7em;
-  transform: translateY(-8px);
-  opacity: 0.7;
+  font-size: 0.8em;
+  text-transform: uppercase;
   font-weight: 600;
+  opacity: 0.7;
+  margin-top: -5px;
 }
 
-/* Text Blocks */
+/* Context Text */
 .context-text {
   font-size: 1em;
-  text-align: left; /* Left-aligned */
+  text-align: left;
   max-width: 600px;
 }
 
-.text-set {
-  position: relative;
-  opacity: 0;
-}
-
-.reveal-text {
-  margin-bottom: 10px;
-}
-
-/* Mobile Optimizations */
+/* Mobile Optimization */
 @media (max-width: 768px) {
   .header-text {
     font-size: 1.5em;
-    text-align: center; /* Centered for mobile */
+    text-align: center;
   }
 
   .countdown-container {
-    justify-content: center; /* Centers the countdown */
+    justify-content: center;
   }
 
   .counter {
     width: 120px;
     height: 120px;
-    padding: 15px;
   }
 
   .num {
@@ -108,12 +107,12 @@ html, body {
   }
 
   .text {
-    font-size: 0.65em;
+    font-size: 0.7em;
   }
 
   .context-text {
     font-size: 0.9em;
-    text-align: center; /* Centers text on mobile */
+    text-align: center;
   }
 }
 </style>
@@ -143,32 +142,8 @@ html, body {
       <div class="text">SECONDS</div>
     </div>
   </div>
-
-  <div class="context-text">
-    <div class="text-set set-1">
-      <p class="reveal-text">The ICSID tribunal is set to rule on AVZ’s 75% ownership claim.</p>
-      <p class="reveal-text">This decision will determine control of the world's largest lithium deposit.</p>
-      <p class="reveal-text">AVZ seeks to restore its rightful stake in the Manono Lithium Project.</p>
-    </div>
-    <div class="text-set set-2">
-      <p class="reveal-text">On March 15, 2025 at the ICC in Paris, AVZ Minerals Limited won a</p>
-      <p class="reveal-text">legal victory against La Congolaise d'Exploitation Minière (Cominière).</p>
-      <p class="reveal-text">The partial penalty to be enforced amounts to €39.125 million plus interest.</p>
-    </div>
-    <div class="text-set set-3">
-      <p class="reveal-text">The ICSID tribunal is set to rule on AVZ’s remaining 75% ownership claim.</p>
-      <p class="reveal-text">This decision could reshape control over one of the world's largest lithium deposits.</p>
-      <p class="reveal-text">AVZ seeks to restore its rightful stake in the Manono Lithium Project.</p>
-    </div>
-    <div class="text-set set-4">
-      <p class="reveal-text">Global investors are closely watching as the ruling nears.</p>
-      <p class="reveal-text">The final outcome will have major implications for the lithium industry.</p>
-      <p class="reveal-text">Legal clarity could determine future investment in the DRC.</p>
-    </div>
-  </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script>
 // Countdown Timer
 const countdownDate = new Date("2025-06-02T00:00:00").getTime();
@@ -194,21 +169,6 @@ function updateCountdown() {
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
-
-// GSAP Text Animation
-let textSets = document.querySelectorAll(".text-set");
-let timeline = gsap.timeline({ repeat: -1 });
-
-textSets.forEach((set) => {
-  let lines = set.querySelectorAll(".reveal-text");
-  timeline.to(set, { opacity: 1, duration: 0.5 });
-
-  lines.forEach((line, i) => {
-    timeline.fromTo(line, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.5, delay: i * 1.5 });
-  });
-
-  timeline.to(set, { opacity: 0, duration: 1, delay: 2 });
-});
 </script>
 </body>
 </html>
