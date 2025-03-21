@@ -13,7 +13,7 @@
 }
 
 body {
-    background: url('https://www.nasa.gov/wp-content/uploads/2023/03/127a0959.jpeg') no-repeat center center/cover;
+    background: url('https://www.pixelstalk.net/wp-conte...rth-at-night-view-from-space-4k-wallpaper.jpg') no-repeat center center/cover;
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,6 @@ body {
     padding: 20px;
 }
 
-/* Desktop Styling */
 .header-text {
     font-size: 1.8em;
     font-weight: 600;
@@ -92,9 +91,12 @@ body {
 /* ✅ Mobile Optimization */
 @media (max-width: 768px) {
     .header-text {
-        font-size: 1.6em; /* Adjust this value as needed */
+        font-size: 1.2em; /* Smaller font size for mobile */
+        width: 90%;
+        left: 5%;
+        transform: none;
     }
-    
+
     .countdown-container {
         display: grid;
         grid-template-columns: 1fr 1fr; /* Two columns */
@@ -102,33 +104,27 @@ body {
         width: 90%;
         max-width: 400px;
     }
-}
-
 
     .counter {
         width: 100%;
-        aspect-ratio: 1 / 1; /* Makes it a square */
+        height: auto;
+        aspect-ratio: 1 / 1; /* Ensures the boxes remain square */
         padding: 20px;
     }
 
     .num {
-        font-size: 3.5em; /* Bigger numbers */
+        font-size: 3em; /* Larger numbers for mobile */
     }
 
     .text {
-        font-size: 0.85em; /* Bigger labels */
-    }
-
-    .header-text, .context-text {
-        width: 90%;
-        font-size: 1.4em;
-        text-align: left; /* ✅ Keep text left-aligned */
-        position: static;
-        transform: none;
+        font-size: 0.85em;
     }
 
     .context-text {
-        margin-top: 20px;
+        font-size: 0.9em;
+        width: 90%;
+        left: 5%;
+        transform: none;
     }
 }
 </style>
@@ -136,8 +132,8 @@ body {
 <body>
 
 <div class="header-text">
-    ICSID arbitration tribunal of AVZ vs<br>
-    The Democratic Republic of the Congo.
+ICSID arbitration tribunal of AVZ vs<br>
+The Democratic Republic of the Congo.
 </div>
 
 <div class="countdown-container">
@@ -213,20 +209,23 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// GSAP Timeline for text animation
+// GSAP Timeline for line-by-line animation in sets
 let textSets = document.querySelectorAll(".text-set");
 let timeline = gsap.timeline({ repeat: -1 });
 
-textSets.forEach((set) => {
+textSets.forEach((set, index) => {
     let lines = set.querySelectorAll(".reveal-text");
 
-    timeline.to(set, { opacity: 1, duration: 0.5 });
+    timeline.to(set, { opacity: 1, duration: 0.5 }); // Fade in entire set
 
     lines.forEach((line, i) => {
-        timeline.fromTo(line, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.5, ease: "power2.out", delay: i * 1.5 });
+        timeline.fromTo(line,
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 1.5, ease: "power2.out", delay: i * 1.5 }
+        );
     });
 
-    timeline.to(set, { opacity: 0, duration: 1, delay: 2 });
+    timeline.to(set, { opacity: 0, duration: 1, delay: 2 }); // Hold for 2s then fade out
 });
 </script>
 
