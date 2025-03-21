@@ -30,9 +30,8 @@ body {
     text-align: left;
     width: 600px;
     line-height: 1.4;
-    margin-bottom: 20px;
     position: absolute;
-    top: 12%;  /* Adjust the height */
+    top: 12%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -54,7 +53,6 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom: 30px;
     position: absolute;
     top: 40%;
 }
@@ -90,7 +88,7 @@ body {
     text-align: left;
     width: 600px;
     position: absolute;
-    top: 55%; /* Move it lower */
+    top: 55%;
     left: 50%;
     transform: translateX(-50%);
     line-height: 1.5;
@@ -101,13 +99,14 @@ body {
     position: absolute;
     width: 100%;
     opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 /* ✅ Mobile Optimization */
 @media (max-width: 768px) {
     /* Mobile Splash Screen */
     body {
-        background: url('https://i.pinimg.com/736x/d8/a2/ff/d8a2ffd08fbe8b670eaa1446b23e96af.jpg') no-repeat center center/cover;
+        background: url('https://i.pinimg.com/736x/d8/b0/56/d8b05633377a297607b0a07871637adb.jpg') no-repeat center center/cover;
     }
 
     .header-text {
@@ -158,13 +157,15 @@ body {
         width: 90%;
         left: 50%;
         transform: translateX(-50%);
-        top: 60%; /* Adjusted so it's visible */
+        top: 60%;
     }
+}
 
-    /* Mobile Context Content */
-    .mobile-text-set {
-        display: block;
-    }
+/* Staggered Text Animation */
+.reveal-text {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
 </style>
 </head>
@@ -200,7 +201,7 @@ body {
     </div>
 </div>
 
-<!-- ✅ Desktop Context Text -->
+<!-- ✅ Desktop Context Text (Animated) -->
 <div class="context-text">
     <div class="text-set set-1">
         <p class="reveal-text">The ICSID tribunal is set to rule on AVZ’s 75% ownership claim.</p>
@@ -209,7 +210,7 @@ body {
     </div>
 </div>
 
-<!-- ✅ Mobile Context Text -->
+<!-- ✅ Mobile Context Text (Animated) -->
 <div class="context-text mobile-text-set">
     <p class="reveal-text">ICSID ruling on AVZ’s ownership.</p>
     <p class="reveal-text">Control of the world's largest lithium deposit at stake.</p>
@@ -239,6 +240,18 @@ function updateCountdown() {
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+/* ✅ Staggered Reveal Animation */
+document.addEventListener("DOMContentLoaded", () => {
+    const textElements = document.querySelectorAll(".reveal-text");
+    
+    textElements.forEach((text, index) => {
+        setTimeout(() => {
+            text.style.opacity = "1";
+            text.style.transform = "translateY(0)";
+        }, index * 1500); // Staggered delay (1.5s apart)
+    });
+});
 </script>
 
 </body>
