@@ -104,11 +104,6 @@ body {
 
 /* ✅ Mobile Optimization */
 @media (max-width: 768px) {
-    /* Mobile Splash Screen */
-    body {
-        background: url('https://i.pinimg.com/736x/d8/b0/56/d8b05633377a297607b0a07871637adb.jpg') no-repeat center center/cover;
-    }
-
     .header-text {
         font-size: 2.8em;
         width: 85%;
@@ -201,19 +196,14 @@ body {
     </div>
 </div>
 
-<!-- ✅ Desktop Context Text (Animated) -->
+<!-- ✅ 6 Rotating Desktop Context Text Sets -->
 <div class="context-text">
-    <div class="text-set set-1">
-        <p class="reveal-text">The ICSID tribunal is set to rule on AVZ’s 75% ownership claim.</p>
-        <p class="reveal-text">This decision will determine control of the world's largest lithium deposit.</p>
-        <p class="reveal-text">AVZ seeks to restore its rightful stake in the Manono Lithium Project.</p>
-    </div>
-</div>
-
-<!-- ✅ Mobile Context Text (Animated) -->
-<div class="context-text mobile-text-set">
-    <p class="reveal-text">ICSID ruling on AVZ’s ownership.</p>
-    <p class="reveal-text">Control of the world's largest lithium deposit at stake.</p>
+    <div class="text-set set-1">ICSID ruling on AVZ’s ownership.</div>
+    <div class="text-set set-2">Control of the world's largest lithium deposit at stake.</div>
+    <div class="text-set set-3">DRC nationalized Manono. Can AVZ reverse it?</div>
+    <div class="text-set set-4">Billions in lithium. One legal decision.</div>
+    <div class="text-set set-5">Can AVZ reclaim what it lost?</div>
+    <div class="text-set set-6">The final battle for Manono.</div>
 </div>
 
 <script>
@@ -241,17 +231,22 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-/* ✅ Staggered Reveal Animation */
-document.addEventListener("DOMContentLoaded", () => {
-    const textElements = document.querySelectorAll(".reveal-text");
-    
-    textElements.forEach((text, index) => {
-        setTimeout(() => {
-            text.style.opacity = "1";
-            text.style.transform = "translateY(0)";
-        }, index * 1500); // Staggered delay (1.5s apart)
+/* ✅ Staggered Rotating Context Text */
+let currentTextIndex = 0;
+const textSets = document.querySelectorAll(".text-set");
+
+function rotateText() {
+    textSets.forEach((set, index) => {
+        set.style.opacity = "0";
     });
-});
+
+    textSets[currentTextIndex].style.opacity = "1";
+
+    currentTextIndex = (currentTextIndex + 1) % textSets.length;
+}
+
+setInterval(rotateText, 4000); // Rotate every 4 seconds
+rotateText();
 </script>
 
 </body>
