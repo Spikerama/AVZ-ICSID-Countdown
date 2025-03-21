@@ -37,12 +37,12 @@ body {
     transform: translateX(-50%);
 }
 
-/* Desktop Headline (default) */
+/* Desktop Headline */
 .desktop-headline {
     display: block;
 }
 
-/* Mobile Headline (hidden by default) */
+/* Mobile Headline */
 .mobile-headline {
     display: none;
 }
@@ -56,7 +56,7 @@ body {
     width: 100%;
     margin-bottom: 30px;
     position: absolute;
-    top: 40%; /* Adjust the position */
+    top: 40%;
 }
 
 /* ✅ Countdown Boxes */
@@ -84,7 +84,7 @@ body {
     font-weight: 600;
 }
 
-/* ✅ Context Text */
+/* ✅ Desktop Context Text */
 .context-text {
     font-size: 1em;
     text-align: left;
@@ -93,7 +93,7 @@ body {
     top: 55%; /* Move it lower */
     left: 50%;
     transform: translateX(-50%);
-    line-height: 1.5; /* Adjust text height */
+    line-height: 1.5;
 }
 
 /* Hide all text sets initially */
@@ -105,13 +105,18 @@ body {
 
 /* ✅ Mobile Optimization */
 @media (max-width: 768px) {
+    /* Mobile Splash Screen */
+    body {
+        background: url('YOUR_MOBILE_SPLASH_SCREEN_URL_HERE') no-repeat center center/cover;
+    }
+
     .header-text {
-        font-size: 2.8em;  /* Adjust the mobile size */
+        font-size: 2.8em;
         width: 85%;
         left: 50%;
         transform: translateX(-50%);
         text-align: left;
-        top: 5%; /* Adjust height */
+        top: 5%;
     }
 
     /* Hide Desktop Headline & Show Mobile Version */
@@ -125,34 +130,40 @@ body {
     /* Make countdown responsive */
     .countdown-container {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Two columns */
+        grid-template-columns: 1fr 1fr;
         gap: 10px;
         width: 90%;
         max-width: 400px;
-        top: 25%; /* Move it up */
+        top: 30%;
     }
 
     .counter {
         width: 100%;
         height: auto;
-        aspect-ratio: 1 / 1; /* Keep them square */
+        aspect-ratio: 1 / 1;
         padding: 20px;
     }
 
     .num {
-        font-size: 5em; /* Bigger numbers */
+        font-size: 5em;
     }
 
     .text {
         font-size: 1em;
     }
 
+    /* ✅ Mobile Context Text */
     .context-text {
-        font-size: 0.8em;
+        font-size: 0.9em;
         width: 90%;
         left: 50%;
         transform: translateX(-50%);
-        top: 5%; /* Move lower */
+        top: 60%; /* Adjusted so it's visible */
+    }
+
+    /* Mobile Context Content */
+    .mobile-text-set {
+        display: block;
     }
 }
 </style>
@@ -189,12 +200,19 @@ body {
     </div>
 </div>
 
+<!-- ✅ Desktop Context Text -->
 <div class="context-text">
     <div class="text-set set-1">
         <p class="reveal-text">The ICSID tribunal is set to rule on AVZ’s 75% ownership claim.</p>
         <p class="reveal-text">This decision will determine control of the world's largest lithium deposit.</p>
         <p class="reveal-text">AVZ seeks to restore its rightful stake in the Manono Lithium Project.</p>
     </div>
+</div>
+
+<!-- ✅ Mobile Context Text -->
+<div class="context-text mobile-text-set">
+    <p class="reveal-text">ICSID ruling on AVZ’s ownership.</p>
+    <p class="reveal-text">Control of the world's largest lithium deposit at stake.</p>
 </div>
 
 <script>
