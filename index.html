@@ -36,12 +36,12 @@ body {
     transform: translateX(-50%);
 }
 
-/* Desktop Headline */
+/* Desktop Headline (default) */
 .desktop-headline {
     display: block;
 }
 
-/* Mobile Headline */
+/* Mobile Headline (hidden by default) */
 .mobile-headline {
     display: none;
 }
@@ -82,7 +82,7 @@ body {
     font-weight: 600;
 }
 
-/* ✅ Desktop Context Text */
+/* ✅ Context Text */
 .context-text {
     font-size: 1em;
     text-align: left;
@@ -99,17 +99,18 @@ body {
     position: absolute;
     width: 100%;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
 }
 
 /* ✅ Mobile Optimization */
 @media (max-width: 768px) {
+    body {
+        background: url('YOUR-MOBILE-SPLASH-SCREEN.jpg') no-repeat center center/cover;
+    }
+
     .header-text {
-        font-size: 2.8em;
-        width: 85%;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: left;
+        font-size: 2.5em;
+        width: 90%;
+        text-align: center;
         top: 5%;
     }
 
@@ -121,14 +122,13 @@ body {
         display: block;
     }
 
-    /* Make countdown responsive */
     .countdown-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
         width: 90%;
         max-width: 400px;
-        top: 30%;
+        top: 25%;
     }
 
     .counter {
@@ -139,7 +139,7 @@ body {
     }
 
     .num {
-        font-size: 5em;
+        font-size: 4.5em;
     }
 
     .text {
@@ -150,17 +150,9 @@ body {
     .context-text {
         font-size: 0.9em;
         width: 90%;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 60%;
+        text-align: center;
+        top: 65%;
     }
-}
-
-/* Staggered Text Animation */
-.reveal-text {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
 </style>
 </head>
@@ -196,16 +188,30 @@ body {
     </div>
 </div>
 
-<!-- ✅ 6 Rotating Desktop Context Text Sets -->
+<!-- ✅ Animated Context Text for Desktop & Mobile -->
 <div class="context-text">
-    <div class="text-set set-1">ICSID ruling on AVZ’s ownership.</div>
-    <div class="text-set set-2">Control of the world's largest lithium deposit at stake.</div>
-    <div class="text-set set-3">DRC nationalized Manono. Can AVZ reverse it?</div>
-    <div class="text-set set-4">Billions in lithium. One legal decision.</div>
-    <div class="text-set set-5">Can AVZ reclaim what it lost?</div>
-    <div class="text-set set-6">The final battle for Manono.</div>
+    <div class="text-set set-1">
+        <p class="desktop-text">The ICSID tribunal is set to rule on AVZ’s 75% ownership claim.</p>
+        <p class="mobile-text">AVZ’s 75% claim under review.</p>
+    </div>
+
+    <div class="text-set set-2">
+        <p class="desktop-text">This decision will determine control of the world's largest lithium deposit.</p>
+        <p class="mobile-text">Control of the lithium deposit at stake.</p>
+    </div>
+
+    <div class="text-set set-3">
+        <p class="desktop-text">AVZ seeks to restore its rightful stake in the Manono Lithium Project.</p>
+        <p class="mobile-text">Manono Project claim in contention.</p>
+    </div>
+
+    <div class="text-set set-4">
+        <p class="desktop-text">Global investors are closely watching as the ruling nears.</p>
+        <p class="mobile-text">Global investors are watching.</p>
+    </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script>
 const countdownDate = new Date("2025-06-02T00:00:00").getTime();
 const daysElem = document.querySelector(".days");
@@ -231,22 +237,16 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-/* ✅ Staggered Rotating Context Text */
-let currentTextIndex = 0;
-const textSets = document.querySelectorAll(".text-set");
+// ✅ GSAP Animation (Restored for Desktop, Adjusted for Mobile)
+let textSets = document.querySelectorAll(".text-set");
+let timeline = gsap.timeline({ repeat: -1 });
 
-function rotateText() {
-    textSets.forEach((set, index) => {
-        set.style.opacity = "0";
-    });
+textSets.forEach((set, index) => {
+    let text = window.innerWidth < 768 ? set.querySelector(".mobile-text") : set.querySelector(".desktop-text");
 
-    textSets[currentTextIndex].style.opacity = "1";
-
-    currentTextIndex = (currentTextIndex + 1) % textSets.length;
-}
-
-setInterval(rotateText, 4000); // Rotate every 4 seconds
-rotateText();
+    timeline.to(set, { opacity: 1, duration: 1 });
+    timeline.to(set, { opacity: 0, duration: 1, delay: 2 });
+});
 </script>
 
 </body>
