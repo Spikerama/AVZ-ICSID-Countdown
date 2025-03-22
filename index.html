@@ -235,27 +235,28 @@ function animateTextSets() {
     const textSets = document.querySelectorAll(".text-set");
     let currentSetIndex = 0;
 
-    function showNextSet() {
-        const currentSet = textSets[currentSetIndex];
-        gsap.to(currentSet, { opacity: 1, duration: 1 });
+    function animateTextSets() {
+    const textSets = document.querySelectorAll(".text-set");
+    let timeline = gsap.timeline({ repeat: -1 }); // Loop infinitely
 
-        gsap.fromTo(
-            currentSet.querySelectorAll(".reveal-text"),
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, stagger: 0.3, duration: 1.2 }
-        );
+    textSets.forEach((set) => {
+        let lines = set.querySelectorAll(".reveal-text");
 
-        setTimeout(() => {
-            gsap.to(currentSet, { opacity: 0, duration: 1.8 });
-            currentSetIndex = (currentSetIndex + 1) % textSets.length;
-            setTimeout(showNextSet, 300);
-        }, 3500);
-    }
+        timeline.to(set, { opacity: 1, duration: 1 }); // Fade in entire set
 
-    showNextSet();
+        lines.forEach((line, i) => {
+            timeline.fromTo(line, 
+                { opacity: 0, y: 20 }, 
+                { opacity: 1, y: 0, duration: 1.2, ease: "power2.out", delay: i * 0.5 }
+            );
+        });
+
+        timeline.to(set, { opacity: 0, duration: 1, delay: 4 }); // Hold for 4s then fade out
+    });
 }
 
 animateTextSets();
+
 </script>
 
 </body>
