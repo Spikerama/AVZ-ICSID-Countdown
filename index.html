@@ -260,33 +260,3 @@ animateTextSets();
 
 </body>
 </html>
-
-
-Yesterday you game me this which had a delay in the GSAP Timeline section like this
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // GSAP Timeline for line-by-line animation in sets
-        let textSets = document.querySelectorAll(".text-set");
-        let timeline = gsap.timeline({ repeat: -1 });
-
-        textSets.forEach((set, index) => {
-            let lines = set.querySelectorAll(".reveal-text");
-
-            timeline.to(set, { opacity: 1, duration: 0.5 }); // Fade in entire set
-
-            lines.forEach((line, i) => {
-                timeline.fromTo(line, 
-                    { opacity: 0, y: 10 }, 
-                    { opacity: 1, y: 0, duration: 1.5, ease: "power2.out", delay: i * 1.5 }
-                );
-            });
-
-            timeline.to(set, { opacity: 0, duration: 1, delay: 2 }); // Hold for 2s then fade out
-        });
-
-    </script>
-
-</body>
-</html>
