@@ -235,29 +235,58 @@ function animateTextSets() {
     const textSets = document.querySelectorAll(".text-set");
     let currentSetIndex = 0;
 
-    function animateTextSets() {
-    const textSets = document.querySelectorAll(".text-set");
-    let timeline = gsap.timeline({ repeat: -1 }); // Loop infinitely
+    function showNextSet() {
+        const currentSet = textSets[currentSetIndex];
+        gsap.to(currentSet, { opacity: 1, duration: 1 });
 
-    textSets.forEach((set) => {
-        let lines = set.querySelectorAll(".reveal-text");
+        gsap.fromTo(
+            currentSet.querySelectorAll(".reveal-text"),
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, stagger: 0.3, duration: 1.2 }
+        );
 
-        timeline.to(set, { opacity: 1, duration: 1 }); // Fade in entire set
+        setTimeout(() => {
+            gsap.to(currentSet, { opacity: 0, duration: 1.8 });
+            currentSetIndex = (currentSetIndex + 1) % textSets.length;
+            setTimeout(showNextSet, 300);
+        }, 3500);
+    }
 
-        lines.forEach((line, i) => {
-            timeline.fromTo(line, 
-                { opacity: 0, y: 20 }, 
-                { opacity: 1, y: 0, duration: 1.2, ease: "power2.out", delay: i * 0.5 }
-            );
-        });
-
-        timeline.to(set, { opacity: 0, duration: 1, delay: 4 }); // Hold for 4s then fade out
-    });
+    showNextSet();
 }
 
 animateTextSets();
-
 </script>
+
+</body>
+</html>
+
+
+Yesterday you game me this which had a delay in the GSAP Timeline section like this
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // GSAP Timeline for line-by-line animation in sets
+        let textSets = document.querySelectorAll(".text-set");
+        let timeline = gsap.timeline({ repeat: -1 });
+
+        textSets.forEach((set, index) => {
+            let lines = set.querySelectorAll(".reveal-text");
+
+            timeline.to(set, { opacity: 1, duration: 0.5 }); // Fade in entire set
+
+            lines.forEach((line, i) => {
+                timeline.fromTo(line, 
+                    { opacity: 0, y: 10 }, 
+                    { opacity: 1, y: 0, duration: 1.5, ease: "power2.out", delay: i * 1.5 }
+                );
+            });
+
+            timeline.to(set, { opacity: 0, duration: 1, delay: 2 }); // Hold for 2s then fade out
+        });
+
+    </script>
 
 </body>
 </html>
